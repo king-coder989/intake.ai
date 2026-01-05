@@ -60,20 +60,20 @@
   .dark {
     /* Charcoal backgrounds: #0F1419, #12171D, #161B22 */
     --background: 210 22% 8%;
-    --foreground: 216 15% 91%;
+    --foreground: 0 0% 100%;
 
     --card: 215 20% 10%;
-    --card-foreground: 216 15% 91%;
+    --card-foreground: 0 0% 100%;
 
     --popover: 215 20% 10%;
-    --popover-foreground: 216 15% 91%;
+    --popover-foreground: 0 0% 100%;
 
-    /* Off-white primary text: #E6EAF0 */
-    --primary: 216 15% 91%;
+    /* Pure white primary text */
+    --primary: 0 0% 100%;
     --primary-foreground: 210 22% 8%;
 
     --secondary: 215 18% 14%;
-    --secondary-foreground: 216 15% 91%;
+    --secondary-foreground: 0 0% 100%;
 
     /* Muted gray secondary: #9AA4B2 */
     --muted: 215 15% 18%;
@@ -81,21 +81,21 @@
 
     /* Muted blue/cyan accent */
     --accent: 200 45% 45%;
-    --accent-foreground: 216 15% 91%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 62% 40%;
-    --destructive-foreground: 216 15% 91%;
+    --destructive-foreground: 0 0% 100%;
 
     --border: 215 18% 18%;
     --input: 215 18% 18%;
     --ring: 200 45% 45%;
 
     --sidebar-background: 210 22% 6%;
-    --sidebar-foreground: 216 15% 91%;
+    --sidebar-foreground: 0 0% 100%;
     --sidebar-primary: 200 45% 45%;
-    --sidebar-primary-foreground: 216 15% 91%;
+    --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 215 18% 12%;
-    --sidebar-accent-foreground: 216 15% 91%;
+    --sidebar-accent-foreground: 0 0% 100%;
     --sidebar-border: 215 18% 14%;
     --sidebar-ring: 200 45% 45%;
     
