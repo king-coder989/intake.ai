@@ -64,11 +64,11 @@ export const HeroNew = () => {
   );
 };
 
-// Abstract visualization component
+// Abstract visualization component - silver/gray themed
 const HeroVisualization = () => {
   return (
     <svg viewBox="0 0 400 600" className="w-full h-full" preserveAspectRatio="xMidYMid slice">
-      {/* Floating data layers */}
+      {/* Floating data layers - silver/gray */}
       {[0, 1, 2, 3, 4].map((i) => (
         <g key={i} style={{ animation: `float ${6 + i}s ease-in-out infinite`, animationDelay: `${i * 0.5}s` }}>
           <rect
@@ -80,8 +80,8 @@ const HeroVisualization = () => {
             fill="none"
             stroke="currentColor"
             strokeWidth={0.5}
-            className="text-accent"
-            opacity={0.3 - i * 0.05}
+            className="text-muted-foreground"
+            opacity={0.25 - i * 0.04}
           />
           {/* Data lines inside */}
           {[0, 1, 2].map((j) => (
@@ -92,32 +92,32 @@ const HeroVisualization = () => {
               width={100 + Math.random() * 100}
               height={4}
               rx={2}
-              className="fill-accent"
-              opacity={0.2}
+              className="fill-muted-foreground"
+              opacity={0.15}
             />
           ))}
         </g>
       ))}
       
-      {/* Connection lines */}
+      {/* Connection lines - silver */}
       <path
         d="M200 100 L200 500"
         stroke="currentColor"
         strokeWidth={0.5}
-        className="text-accent"
-        opacity={0.2}
+        className="text-muted-foreground"
+        opacity={0.15}
         strokeDasharray="4 4"
       />
       
-      {/* Nodes */}
+      {/* Nodes - silver */}
       {[150, 250, 350, 450].map((y, i) => (
         <circle
           key={i}
           cx={200}
           cy={y}
-          r={4}
-          className="fill-accent"
-          opacity={0.4}
+          r={3}
+          className="fill-muted-foreground"
+          opacity={0.3}
         />
       ))}
     </svg>
