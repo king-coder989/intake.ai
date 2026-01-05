@@ -25,11 +25,11 @@ export const ProblemSection = () => {
         <div className="max-w-2xl mx-auto">
           {problems.map((problem, i) => (
             <AnimatedSection key={i} delay={i * 100} className="mb-6">
-              <div className="flex items-start gap-4 p-5 rounded-xl border border-border/30 bg-card/30 backdrop-blur-sm transition-all duration-300 hover:border-accent/30 hover:bg-card/50">
+              <div className="flex items-start gap-4 p-5 rounded-xl border border-border bg-card transition-colors duration-200 hover:border-accent/50">
                 <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-destructive/10 flex items-center justify-center">
                   <span className="text-destructive text-sm font-medium">✕</span>
                 </div>
-                <p className="text-foreground/90 text-lg leading-relaxed">{problem}</p>
+                <p className="text-foreground text-lg leading-relaxed">{problem}</p>
               </div>
             </AnimatedSection>
           ))}

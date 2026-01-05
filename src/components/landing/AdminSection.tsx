@@ -52,13 +52,10 @@ export const AdminSection = () => {
           {/* Dashboard mockup */}
           <AnimatedSection delay={200} animation="scale-in">
             <div className="relative">
-              {/* Glow behind */}
-              <div className="absolute inset-0 bg-accent/10 blur-[60px] rounded-3xl" />
-              
               {/* Dashboard frame */}
-              <div className="relative rounded-2xl border border-border/50 bg-card/80 backdrop-blur-sm overflow-hidden shadow-2xl">
+              <div className="relative rounded-2xl border border-border bg-card overflow-hidden">
                 {/* Header bar */}
-                <div className="flex items-center gap-2 px-4 py-3 border-b border-border/50 bg-secondary/50">
+                <div className="flex items-center gap-2 px-4 py-3 border-b border-border bg-secondary">
                   <div className="w-3 h-3 rounded-full bg-destructive/60" />
                   <div className="w-3 h-3 rounded-full bg-urgency-medium/60" />
                   <div className="w-3 h-3 rounded-full bg-urgency-low/60" />

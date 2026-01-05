@@ -66,7 +66,6 @@ export default {
           medium: "hsl(var(--urgency-medium))",
           low: "hsl(var(--urgency-low))",
         },
-        glow: "hsl(var(--glow))",
         glass: "hsl(var(--glass))",
         surface: "hsl(var(--surface))",
       },

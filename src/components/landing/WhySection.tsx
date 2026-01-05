@@ -25,11 +25,11 @@ export const WhySection = () => {
         <div className="max-w-2xl mx-auto space-y-6">
           {points.map((point, i) => (
             <AnimatedSection key={i} delay={i * 100}>
-              <div className="flex items-start gap-4 p-6 rounded-xl border border-border/30 bg-card/30 backdrop-blur-sm">
+              <div className="flex items-start gap-4 p-6 rounded-xl border border-border bg-card">
                 <div className="flex-shrink-0 w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center">
                   <Check className="w-4 h-4 text-accent" />
                 </div>
-                <p className="text-foreground/90 text-lg leading-relaxed">{point}</p>
+                <p className="text-foreground text-lg leading-relaxed">{point}</p>
               </div>
             </AnimatedSection>
           ))}

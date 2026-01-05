@@ -45,7 +45,7 @@ export const ImpactSection = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {impacts.map((impact, i) => (
             <AnimatedSection key={i} delay={i * 100}>
-              <div className="text-center p-8 rounded-2xl border border-border/30 bg-card/30 backdrop-blur-sm transition-all duration-300 hover:border-accent/30 hover:bg-card/50 group">
+              <div className="text-center p-8 rounded-2xl border border-border bg-card transition-colors duration-200 hover:border-accent/50 group">
                 <div className="w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center mx-auto mb-6 transition-colors group-hover:bg-accent/20">
                   <impact.icon className="w-7 h-7 text-accent" />
                 </div>

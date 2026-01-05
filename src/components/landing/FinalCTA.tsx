@@ -4,16 +4,13 @@ import { AnimatedSection } from "./AnimatedSection";
 
 export const FinalCTA = () => {
   return (
-    <section className="relative py-32 md:py-40 overflow-hidden">
-      {/* Gradient orbs */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-accent/10 blur-[120px]" />
-      
+    <section className="relative py-32 md:py-40 overflow-hidden bg-secondary/30">
       <div className="relative section-container-sm text-center">
         <AnimatedSection>
           <h2 className="text-foreground mb-6">
             Ready to bring order
             <br />
-            <span className="gradient-text-accent">to civic complaints?</span>
+            <span className="text-accent">to civic complaints?</span>
           </h2>
         </AnimatedSection>
 
