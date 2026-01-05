@@ -66,7 +66,7 @@ export const HeaderNew = () => {
           </Link>
           <Link
             to="/intake"
-            className="px-5 py-2.5 rounded-lg bg-accent text-accent-foreground text-sm font-medium transition-colors hover:bg-accent/90"
+            className="px-5 py-2.5 rounded-lg bg-foreground text-background text-sm font-medium transition-colors hover:bg-foreground/90"
           >
             Register Complaint
           </Link>
@@ -104,7 +104,7 @@ export const HeaderNew = () => {
               </Link>
               <Link
                 to="/intake"
-                className="block w-full text-center px-5 py-3 rounded-lg bg-accent text-accent-foreground font-medium"
+                className="block w-full text-center px-5 py-3 rounded-lg bg-foreground text-background font-medium"
               >
                 Register Complaint
               </Link>

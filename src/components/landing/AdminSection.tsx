@@ -17,7 +17,7 @@ export const AdminSection = () => {
           {/* Content */}
           <div>
             <AnimatedSection>
-              <span className="inline-block px-4 py-2 rounded-full border border-accent/30 bg-accent/5 text-accent text-sm font-medium mb-8">
+              <span className="inline-block px-4 py-2 rounded-full border border-border text-muted-foreground text-sm font-medium mb-8">
                 For Administrators
               </span>
             </AnimatedSection>
@@ -40,9 +40,9 @@ export const AdminSection = () => {
             <div className="grid grid-cols-2 gap-4">
               {features.map((feature, i) => (
                 <AnimatedSection key={i} delay={i * 50 + 300}>
-                  <div className="flex items-center gap-3 p-3 rounded-lg border border-border/30 bg-card/20">
-                    <feature.icon className="w-5 h-5 text-accent" />
-                    <span className="text-sm text-foreground/80">{feature.label}</span>
+                  <div className="flex items-center gap-3 p-3 rounded-lg border border-border bg-card">
+                    <feature.icon className="w-5 h-5 text-muted-foreground" />
+                    <span className="text-sm text-foreground">{feature.label}</span>
                   </div>
                 </AnimatedSection>
               ))}

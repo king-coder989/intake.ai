@@ -29,7 +29,7 @@ export const SolutionSection = () => {
     <section className="relative py-32 md:py-40 overflow-hidden">
       <div className="relative section-container">
         <AnimatedSection className="text-center mb-20">
-          <span className="inline-block px-4 py-2 rounded-full border border-accent/30 bg-accent/5 text-accent text-sm font-medium mb-8">
+          <span className="inline-block px-4 py-2 rounded-full border border-border text-muted-foreground text-sm font-medium mb-8">
             The Solution
           </span>
           <h2 className="text-foreground max-w-3xl mx-auto">
@@ -43,8 +43,8 @@ export const SolutionSection = () => {
           {features.map((feature, i) => (
             <AnimatedSection key={i} delay={i * 100}>
               <div className="card-glass group h-full">
-                <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-6 transition-colors group-hover:bg-accent/20">
-                  <feature.icon className="w-6 h-6 text-accent" />
+                <div className="w-12 h-12 rounded-xl bg-secondary flex items-center justify-center mb-6 transition-colors group-hover:bg-muted">
+                  <feature.icon className="w-6 h-6 text-foreground" />
                 </div>
                 <h3 className="text-foreground mb-3">{feature.title}</h3>
                 <p className="text-muted-foreground leading-relaxed">

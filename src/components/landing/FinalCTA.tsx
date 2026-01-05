@@ -4,13 +4,13 @@ import { AnimatedSection } from "./AnimatedSection";
 
 export const FinalCTA = () => {
   return (
-    <section className="relative py-32 md:py-40 overflow-hidden bg-secondary/30">
+    <section className="relative py-32 md:py-40 overflow-hidden bg-card">
       <div className="relative section-container-sm text-center">
         <AnimatedSection>
           <h2 className="text-foreground mb-6">
             Ready to bring order
             <br />
-            <span className="text-accent">to civic complaints?</span>
+            <span className="text-muted-foreground">to civic complaints?</span>
           </h2>
         </AnimatedSection>
 
