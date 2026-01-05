@@ -27,9 +27,6 @@ const features = [
 export const SolutionSection = () => {
   return (
     <section className="relative py-32 md:py-40 overflow-hidden">
-      {/* Background glow */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-accent/5 blur-[120px]" />
-      
       <div className="relative section-container">
         <AnimatedSection className="text-center mb-20">
           <span className="inline-block px-4 py-2 rounded-full border border-accent/30 bg-accent/5 text-accent text-sm font-medium mb-8">

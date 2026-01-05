@@ -46,7 +46,7 @@ const Counter = ({ end, suffix = "", duration = 2000 }: CounterProps) => {
   }, [isVisible, end, duration]);
 
   return (
-    <span ref={ref} className="stat-number gradient-text-accent">
+    <span ref={ref} className="stat-number text-accent">
       {count.toLocaleString()}{suffix}
     </span>
   );
@@ -62,9 +62,6 @@ const stats = [
 export const ScaleSection = () => {
   return (
     <section className="relative py-32 md:py-40 overflow-hidden">
-      {/* Accent glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-accent/5 blur-[150px]" />
-      
       <div className="relative section-container">
         <AnimatedSection className="text-center mb-20">
           <span className="inline-block px-4 py-2 rounded-full border border-accent/30 bg-accent/5 text-accent text-sm font-medium mb-8">

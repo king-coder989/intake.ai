@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-/* INTAKE.ai Design System - Premium Civic Infrastructure */
-/* Dark Theme: Deep Charcoal / Slate with Electric Cyan Accent */
+/* INTAKE.ai Design System - Professional Civic Infrastructure */
+/* Dark Theme: Charcoal with Muted Cyan Accent */
 
 @layer base {
   :root {
@@ -26,15 +26,15 @@
     --muted: 220 14% 96%;
     --muted-foreground: 220 9% 46%;
 
-    --accent: 185 70% 50%;
-    --accent-foreground: 222 47% 8%;
+    --accent: 200 45% 45%;
+    --accent-foreground: 210 40% 98%;
 
     --destructive: 0 65% 51%;
     --destructive-foreground: 0 0% 100%;
 
     --border: 220 13% 91%;
     --input: 220 13% 91%;
-    --ring: 185 70% 50%;
+    --ring: 200 45% 45%;
     --radius: 0.5rem;
 
     /* Urgency badges */
@@ -43,63 +43,65 @@
     --urgency-low: 142 71% 45%;
 
     /* Sidebar */
-    --sidebar-background: 222 47% 8%;
-    --sidebar-foreground: 220 14% 96%;
-    --sidebar-primary: 185 70% 50%;
-    --sidebar-primary-foreground: 222 47% 8%;
-    --sidebar-accent: 222 47% 15%;
-    --sidebar-accent-foreground: 220 14% 96%;
-    --sidebar-border: 222 47% 15%;
-    --sidebar-ring: 185 70% 50%;
+    --sidebar-background: 220 18% 8%;
+    --sidebar-foreground: 216 15% 91%;
+    --sidebar-primary: 200 45% 45%;
+    --sidebar-primary-foreground: 216 15% 91%;
+    --sidebar-accent: 220 18% 12%;
+    --sidebar-accent-foreground: 216 15% 91%;
+    --sidebar-border: 220 18% 15%;
+    --sidebar-ring: 200 45% 45%;
     
-    /* Premium design tokens */
-    --glow: 185 70% 50%;
-    --glass: 222 47% 15%;
-    --surface: 222 47% 10%;
+    /* Design tokens */
+    --glass: 220 18% 12%;
+    --surface: 220 18% 8%;
   }
 
   .dark {
-    --background: 222 47% 4%;
-    --foreground: 210 20% 95%;
+    /* Charcoal backgrounds: #0F1419, #12171D, #161B22 */
+    --background: 210 22% 8%;
+    --foreground: 216 15% 91%;
 
-    --card: 222 47% 7%;
-    --card-foreground: 210 20% 95%;
+    --card: 215 20% 10%;
+    --card-foreground: 216 15% 91%;
 
-    --popover: 222 47% 7%;
-    --popover-foreground: 210 20% 95%;
+    --popover: 215 20% 10%;
+    --popover-foreground: 216 15% 91%;
 
-    --primary: 210 20% 95%;
-    --primary-foreground: 222 47% 4%;
+    /* Off-white primary text: #E6EAF0 */
+    --primary: 216 15% 91%;
+    --primary-foreground: 210 22% 8%;
 
-    --secondary: 222 40% 12%;
-    --secondary-foreground: 210 20% 95%;
+    --secondary: 215 18% 14%;
+    --secondary-foreground: 216 15% 91%;
 
-    --muted: 222 30% 18%;
-    --muted-foreground: 220 15% 60%;
+    /* Muted gray secondary: #9AA4B2 */
+    --muted: 215 15% 18%;
+    --muted-foreground: 215 12% 65%;
 
-    --accent: 185 70% 50%;
-    --accent-foreground: 222 47% 4%;
+    /* Muted blue/cyan accent */
+    --accent: 200 45% 45%;
+    --accent-foreground: 216 15% 91%;
 
     --destructive: 0 62% 40%;
-    --destructive-foreground: 210 20% 95%;
+    --destructive-foreground: 216 15% 91%;
 
-    --border: 222 30% 15%;
-    --input: 222 30% 15%;
-    --ring: 185 70% 50%;
+    --border: 215 18% 18%;
+    --input: 215 18% 18%;
+    --ring: 200 45% 45%;
 
-    --sidebar-background: 222 47% 3%;
-    --sidebar-foreground: 220 14% 96%;
-    --sidebar-primary: 185 70% 50%;
-    --sidebar-primary-foreground: 222 47% 4%;
-    --sidebar-accent: 222 47% 8%;
-    --sidebar-accent-foreground: 220 14% 96%;
-    --sidebar-border: 222 47% 8%;
-    --sidebar-ring: 185 70% 50%;
+    --sidebar-background: 210 22% 6%;
+    --sidebar-foreground: 216 15% 91%;
+    --sidebar-primary: 200 45% 45%;
+    --sidebar-primary-foreground: 216 15% 91%;
+    --sidebar-accent: 215 18% 12%;
+    --sidebar-accent-foreground: 216 15% 91%;
+    --sidebar-border: 215 18% 14%;
+    --sidebar-ring: 200 45% 45%;
     
-    /* Premium design tokens */
-    --glow: 185 70% 50%;
-    --glass: 222 30% 12%;
-    --surface: 222 40% 8%;
+    /* Design tokens */
+    --glass: 215 18% 12%;
+    --surface: 215 18% 10%;
   }
 }
 
@@ -117,7 +119,7 @@
     font-feature-settings: "cv11", "ss01";
   }
 
-  /* Premium typography hierarchy - Bold display system */
+  /* Professional typography hierarchy */
   h1 {
     @apply text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1];
     letter-spacing: -0.03em;
@@ -147,36 +149,34 @@
 }
 
 @layer components {
-  /* Premium CTA Button */
+  /* Primary CTA Button - solid, no glow */
   .btn-primary {
-    @apply relative inline-flex items-center justify-center rounded-lg bg-accent px-8 py-4 text-base font-semibold text-accent-foreground transition-all duration-300;
-    @apply hover:shadow-[0_0_40px_rgba(0,200,220,0.35)] hover:scale-[1.02];
+    @apply relative inline-flex items-center justify-center rounded-lg bg-accent px-8 py-4 text-base font-semibold text-accent-foreground transition-all duration-200;
+    @apply hover:bg-accent/90;
     @apply focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-background;
   }
 
   /* Ghost/Secondary button */
   .btn-secondary {
-    @apply inline-flex items-center justify-center rounded-lg border border-border/50 bg-transparent px-8 py-4 text-base font-medium text-foreground transition-all duration-300;
-    @apply hover:border-accent/50 hover:bg-accent/5 hover:text-accent;
+    @apply inline-flex items-center justify-center rounded-lg border border-border bg-transparent px-8 py-4 text-base font-medium text-foreground transition-all duration-200;
+    @apply hover:border-accent hover:text-accent;
     @apply focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-background;
   }
 
-  /* Premium card with glass effect */
+  /* Card styles - no blur, no glass effects */
   .card-base {
-    @apply rounded-xl border border-border/50 bg-card/50 p-6 backdrop-blur-sm;
-    @apply transition-all duration-300 hover:border-accent/30 hover:bg-card/80;
+    @apply rounded-xl border border-border bg-card p-6;
+    @apply transition-colors duration-200 hover:border-accent/50;
   }
 
   .card-glass {
-    @apply rounded-2xl border border-border/30 p-8;
-    background: linear-gradient(135deg, hsl(var(--glass) / 0.6) 0%, hsl(var(--glass) / 0.3) 100%);
-    backdrop-filter: blur(20px);
-    @apply transition-all duration-500 hover:border-accent/40;
+    @apply rounded-2xl border border-border bg-card p-8;
+    @apply transition-colors duration-200 hover:border-accent/50;
   }
 
-  /* Premium input */
+  /* Input */
   .input-base {
-    @apply w-full rounded-lg border border-border/50 bg-surface px-4 py-3 text-foreground placeholder:text-muted-foreground transition-all duration-200;
+    @apply w-full rounded-lg border border-border bg-surface px-4 py-3 text-foreground placeholder:text-muted-foreground transition-colors duration-200;
     @apply focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20;
   }
 
@@ -208,31 +208,11 @@
     @apply mx-auto max-w-5xl px-6 py-20 md:py-28;
   }
 
-  /* Premium glow effects */
-  .glow-accent {
-    box-shadow: 0 0 60px -10px hsl(var(--accent) / 0.4);
-  }
-
-  .glow-subtle {
-    box-shadow: 0 0 80px -20px hsl(var(--accent) / 0.2);
-  }
-
-  /* Gradient text */
-  .gradient-text {
-    @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(var(--foreground)) 0%, hsl(var(--muted-foreground)) 100%);
-  }
-
-  .gradient-text-accent {
-    @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(var(--accent)) 0%, hsl(185 80% 70%) 100%);
-  }
-
-  /* Grid background */
+  /* Grid background - subtle */
   .grid-pattern {
     background-image: 
-      linear-gradient(hsl(var(--border) / 0.3) 1px, transparent 1px),
-      linear-gradient(90deg, hsl(var(--border) / 0.3) 1px, transparent 1px);
+      linear-gradient(hsl(var(--border) / 0.2) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--border) / 0.2) 1px, transparent 1px);
     background-size: 60px 60px;
   }
 
@@ -244,7 +224,7 @@
 }
 
 @layer utilities {
-  /* Scroll animations */
+  /* Scroll animations - kept subtle */
   .animate-fade-up {
     animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     opacity: 0;
@@ -263,10 +243,6 @@
   .animate-scale-in {
     animation: scaleIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     opacity: 0;
-  }
-
-  .animate-glow-pulse {
-    animation: glowPulse 3s ease-in-out infinite;
   }
 
   /* Stagger delays */
@@ -314,15 +290,6 @@
     to {
       opacity: 1;
       transform: scale(1);
-    }
-  }
-
-  @keyframes glowPulse {
-    0%, 100% {
-      box-shadow: 0 0 40px -10px hsl(var(--accent) / 0.3);
-    }
-    50% {
-      box-shadow: 0 0 60px -10px hsl(var(--accent) / 0.5);
     }
   }
 
