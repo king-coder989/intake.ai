@@ -1,73 +1,180 @@
-# Welcome to your Lovable project
+# INTAKE.ai  
+**Pre-Intake Intelligence for Public Grievance Systems**
 
-## Project info
+> Turning unstructured complaints into clean, prioritized signals — before governance begins.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+---
 
-## How can I edit this code?
+## Why INTAKE.ai
 
-There are several ways of editing your application.
+Public authorities don’t fail at resolving issues.  
+They fail **before that** — at intake.
 
-**Use Lovable**
+Every day, thousands of grievances arrive as:
+- free-text complaints
+- mixed languages
+- images, letters, videos
+- no urgency signal
+- no prioritization
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+Critical issues get buried.  
+INTAKE.ai fixes this **one layer earlier**.
 
-Changes made via Lovable will be committed automatically to this repo.
+---
 
-**Use your preferred IDE**
+## What INTAKE.ai Is
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+INTAKE.ai is a **pre-intake civic intelligence system** that:
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+- structures incoming grievances
+- assigns urgency and priority
+- suggests responsible departments
+- provides admin-first visibility
+- optionally anchors complaint states on blockchain for auditability
 
-Follow these steps:
+It **does not** replace government portals.  
+It **does not** enforce resolution.  
+It makes intake sane.
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+---
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+## Product Philosophy
 
-# Step 3: Install the necessary dependencies.
-npm i
+- **Authority-first**: Admin dashboard is the product.
+- **Minimal citizen UX**: One box. One action.
+- **Modular by design**: Features are toggles, not assumptions.
+- **No overclaims**: Intake, not justice.
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+---
 
-**Edit a file directly in GitHub**
+## Core Features
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Citizen Intake (Single Page)
+- Minimal text input (Google-style)
+- Optional attachments:
+  - images
+  - documents
+  - short videos
+- Auto / manual location tagging
+- Instant receipt with complaint ID
 
-**Use GitHub Codespaces**
+---
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+### Intelligence Layer
+- Complaint normalization
+- Language detection
+- Category & sub-category classification
+- Urgency scoring (rule + LLM)
+- Department suggestion
+- Geo-tagging (ward / area)
 
-## What technologies are used for this project?
+---
 
-This project is built with:
+### Admin Dashboard
+- Priority-sorted complaint queue
+- Filters: department, area, status, date
+- Complaint detail view:
+  - structured summary
+  - original text
+  - evidence preview
+  - map pin
+- Status updates & audit logs
+- CSV export
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
+---
+
+### Modular Add-Ons (Toggleable)
+
+| Module | Purpose |
+|------|--------|
+| Predictive Heatmap | Visualize complaint density & trends |
+| Focus Mode | Lock system to a single civic issue |
+| Multimodal Evidence | Attach images & documents |
+| Blockchain Audit | Immutable hash of complaint states |
+
+---
+
+## Blockchain (Optional, Audit-Only)
+
+INTAKE.ai can anchor complaint state hashes on Ethereum.
+
+- append-only
+- no enforcement
+- no tokens
+- no governance claims
+
+Purpose:
+> ensure complaint existence and state transitions cannot be silently altered.
+
+---
+
+## Tech Stack
+
+### Frontend
+- React + Vite
 - Tailwind CSS
+- Firebase Hosting
 
-## How can I deploy this project?
+### Backend
+- Node.js + Express
+- REST API (client–server architecture)
+- Gemini API (LLM orchestration)
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+### Data & Infra
+- Firestore (primary database)
+- Firebase Storage (attachments)
+- Firebase Auth (admin only)
+- Google Maps Platform (location)
 
-## Can I connect a custom domain to my Lovable project?
+### Blockchain (Optional)
+- Solidity (Ethereum, Sepolia testnet)
+- ethers.js (backend interaction)
 
-Yes, you can!
+---
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## Architecture Overview
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Landing / Intake / Admin (Web)
+↓
+Backend API
+↓
+Firestore + Storage
+↓
+Gemini (LLM)
+
+## What This Project Is Not
+
+- ❌ Not a government portal  
+- ❌ Not a legal system  
+- ❌ Not a resolution engine  
+- ❌ Not a blockchain governance product  
+
+It is an **intelligence layer**, nothing more, nothing less.
+
+---
+
+## Demo Flow (90 seconds)
+
+1. Open landing page  
+2. Register a complaint in one text box  
+3. Receive instant complaint ID  
+4. Switch to admin dashboard  
+5. See prioritized queue  
+6. Open complaint → structured summary + map  
+7. Toggle heatmap / audit hash  
+8. Done
+
+---
+
+## Setup (Local)
+
+```bash
+# frontend
+cd frontend
+npm install
+npm run dev
+
+# backend
+cd backend
+npm install
+npm run dev
