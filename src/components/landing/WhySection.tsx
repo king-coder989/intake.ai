@@ -10,15 +10,10 @@ const points = [
 export const WhySection = () => {
   return (
     <section className="relative py-32 md:py-40 overflow-hidden">
-      {/* Gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/20 to-background" />
-      
       <div className="relative section-container-sm">
         <AnimatedSection className="text-center mb-16">
           <h2 className="text-foreground max-w-2xl mx-auto">
-            Fixing the layer 
-            <span className="text-accent"> every system </span>
-            depends on.
+            Fixing the layer every system depends on.
           </h2>
         </AnimatedSection>
 
@@ -26,8 +21,8 @@ export const WhySection = () => {
           {points.map((point, i) => (
             <AnimatedSection key={i} delay={i * 100}>
               <div className="flex items-start gap-4 p-6 rounded-xl border border-border bg-card">
-                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center">
-                  <Check className="w-4 h-4 text-accent" />
+                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-secondary flex items-center justify-center">
+                  <Check className="w-4 h-4 text-foreground" />
                 </div>
                 <p className="text-foreground text-lg leading-relaxed">{point}</p>
               </div>

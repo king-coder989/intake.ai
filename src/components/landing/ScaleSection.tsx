@@ -46,7 +46,7 @@ const Counter = ({ end, suffix = "", duration = 2000 }: CounterProps) => {
   }, [isVisible, end, duration]);
 
   return (
-    <span ref={ref} className="stat-number text-accent">
+    <span ref={ref} className="stat-number text-foreground">
       {count.toLocaleString()}{suffix}
     </span>
   );
@@ -64,11 +64,11 @@ export const ScaleSection = () => {
     <section className="relative py-32 md:py-40 overflow-hidden">
       <div className="relative section-container">
         <AnimatedSection className="text-center mb-20">
-          <span className="inline-block px-4 py-2 rounded-full border border-accent/30 bg-accent/5 text-accent text-sm font-medium mb-8">
+          <span className="inline-block px-4 py-2 rounded-full border border-border text-muted-foreground text-sm font-medium mb-8">
             National Scale
           </span>
           <h2 className="text-foreground">
-            This is a <span className="text-accent">scale</span> problem.
+            This is a scale problem.
           </h2>
         </AnimatedSection>
 

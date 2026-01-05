@@ -58,50 +58,52 @@
   }
 
   .dark {
-    /* Charcoal backgrounds: #0F1419, #12171D, #161B22 */
-    --background: 210 22% 8%;
+    /* True charcoal black like idanzei.com - #0A0A0A / #111111 / #1A1A1A */
+    --background: 0 0% 4%;
     --foreground: 0 0% 100%;
 
-    --card: 215 20% 10%;
+    /* Cards slightly lighter - subtle distinction */
+    --card: 0 0% 8%;
     --card-foreground: 0 0% 100%;
 
-    --popover: 215 20% 10%;
+    --popover: 0 0% 8%;
     --popover-foreground: 0 0% 100%;
 
     /* Pure white primary text */
     --primary: 0 0% 100%;
-    --primary-foreground: 210 22% 8%;
+    --primary-foreground: 0 0% 4%;
 
-    --secondary: 215 18% 14%;
+    --secondary: 0 0% 12%;
     --secondary-foreground: 0 0% 100%;
 
-    /* Muted gray secondary: #9AA4B2 */
-    --muted: 215 15% 18%;
-    --muted-foreground: 215 12% 65%;
+    /* Muted gray for secondary text */
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 55%;
 
-    /* Muted blue/cyan accent */
-    --accent: 200 45% 45%;
+    /* Muted blue accent - subtle */
+    --accent: 200 40% 50%;
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 62% 40%;
+    --destructive: 0 62% 45%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 215 18% 18%;
-    --input: 215 18% 18%;
-    --ring: 200 45% 45%;
+    /* Subtle borders */
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 200 40% 50%;
 
-    --sidebar-background: 210 22% 6%;
+    --sidebar-background: 0 0% 3%;
     --sidebar-foreground: 0 0% 100%;
-    --sidebar-primary: 200 45% 45%;
+    --sidebar-primary: 200 40% 50%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 215 18% 12%;
+    --sidebar-accent: 0 0% 10%;
     --sidebar-accent-foreground: 0 0% 100%;
-    --sidebar-border: 215 18% 14%;
-    --sidebar-ring: 200 45% 45%;
+    --sidebar-border: 0 0% 12%;
+    --sidebar-ring: 200 40% 50%;
     
     /* Design tokens */
-    --glass: 215 18% 12%;
-    --surface: 215 18% 10%;
+    --glass: 0 0% 10%;
+    --surface: 0 0% 8%;
   }
 }
 
@@ -149,29 +151,29 @@
 }
 
 @layer components {
-  /* Primary CTA Button - solid, no glow */
+  /* Primary CTA Button - clean, minimal */
   .btn-primary {
-    @apply relative inline-flex items-center justify-center rounded-lg bg-accent px-8 py-4 text-base font-semibold text-accent-foreground transition-all duration-200;
-    @apply hover:bg-accent/90;
-    @apply focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-background;
+    @apply relative inline-flex items-center justify-center rounded-lg bg-foreground px-8 py-4 text-base font-medium text-background transition-all duration-200;
+    @apply hover:bg-foreground/90;
+    @apply focus:outline-none focus:ring-2 focus:ring-foreground/50 focus:ring-offset-2 focus:ring-offset-background;
   }
 
-  /* Ghost/Secondary button */
+  /* Ghost/Secondary button - subtle border */
   .btn-secondary {
     @apply inline-flex items-center justify-center rounded-lg border border-border bg-transparent px-8 py-4 text-base font-medium text-foreground transition-all duration-200;
-    @apply hover:border-accent hover:text-accent;
-    @apply focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-background;
+    @apply hover:bg-secondary hover:border-muted-foreground/30;
+    @apply focus:outline-none focus:ring-2 focus:ring-foreground/50 focus:ring-offset-2 focus:ring-offset-background;
   }
 
-  /* Card styles - no blur, no glass effects */
+  /* Card styles - subtle, clean */
   .card-base {
-    @apply rounded-xl border border-border bg-card p-6;
-    @apply transition-colors duration-200 hover:border-accent/50;
+    @apply rounded-2xl border border-border bg-card p-6;
+    @apply transition-colors duration-200 hover:border-muted-foreground/20;
   }
 
   .card-glass {
     @apply rounded-2xl border border-border bg-card p-8;
-    @apply transition-colors duration-200 hover:border-accent/50;
+    @apply transition-colors duration-200 hover:border-muted-foreground/20;
   }
 
   /* Input */

@@ -3,15 +3,9 @@ import { ArrowRight } from "lucide-react";
 
 export const HeroNew = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background layers */}
-      <div className="absolute inset-0 bg-background" />
-      
-      {/* Grid pattern */}
-      <div className="absolute inset-0 grid-pattern opacity-30" />
-      
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
       {/* Hero visual - abstract data visualization */}
-      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1/2 h-[80vh] opacity-20 md:opacity-30">
+      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1/2 h-[80vh] opacity-15 md:opacity-20">
         <HeroVisualization />
       </div>
 
@@ -20,8 +14,7 @@ export const HeroNew = () => {
         <div className="max-w-4xl">
           {/* Eyebrow */}
           <div className="animate-fade-up opacity-0 mb-8">
-            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border bg-secondary text-sm text-muted-foreground">
-              <span className="w-2 h-2 rounded-full bg-accent" />
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border text-sm text-muted-foreground">
               Civic Infrastructure Intelligence
             </span>
           </div>
@@ -30,7 +23,7 @@ export const HeroNew = () => {
           <h1 className="animate-fade-up opacity-0 delay-100 text-foreground mb-8">
             Organising civic complaints
             <br />
-            <span className="text-accent">before they become chaos.</span>
+            <span className="text-muted-foreground">before they become chaos.</span>
           </h1>
 
           {/* Subheadline */}
