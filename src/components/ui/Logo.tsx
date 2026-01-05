@@ -1,25 +1,20 @@
 import { Link } from "react-router-dom";
+import logoImage from "@/assets/logo.png";
 
 interface LogoProps {
-  variant?: "default" | "light";
   size?: "sm" | "md" | "lg";
 }
 
-export const Logo = ({ variant = "default", size = "md" }: LogoProps) => {
+export const Logo = ({ size = "md" }: LogoProps) => {
   const sizeClasses = {
-    sm: "text-lg",
-    md: "text-xl",
-    lg: "text-2xl",
-  };
-
-  const colorClasses = {
-    default: "text-foreground",
-    light: "text-sidebar-foreground",
+    sm: "h-6",
+    md: "h-8",
+    lg: "h-10",
   };
 
   return (
-    <Link to="/" className={`font-semibold tracking-tight ${sizeClasses[size]} ${colorClasses[variant]}`}>
-      intake<span className="text-accent">.ai</span>
+    <Link to="/" className="block">
+      <img src={logoImage} alt="intake.ai" className={sizeClasses[size]} />
     </Link>
   );
 };
