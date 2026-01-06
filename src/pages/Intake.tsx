@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { db } from "@/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { analyzeComplaint } from "@/lib/gemini";
+import { recordAuditOnChain } from "../../ethers.js";
 
 const languages = [{ code: "en", label: "English" }, { code: "hi", label: "हिंदी" }];
 
@@ -40,6 +41,9 @@ const Intake = () => {
         createdAt: serverTimestamp()
       });
       
+      // Record audit on blockchain (non-blocking, graceful failure)
+      recordAuditOnChain(docRef.id, complaint.trim(), "Complaint intake logged").catch(() => {});
+      
       setComplaintId(docRef.id);
       setSubmittedAt(new Date());
       setIsSubmitted(true);
@@ -57,9 +61,9 @@ const Intake = () => {
     <div className="flex min-h-screen flex-col bg-background">
       <header className="border-b border-border/50">
          <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-6">
-           <div className="flex items-center [&_img]:max-h-8 [&_img]:w-auto [&_img]:object-contain">
-             <Logo size="md" />
-           </div>
+            <div className="flex items-center [&_img]:max-h-14 [&_img]:w-auto [&_img]:object-contain">
+              <Logo size="md" />
+            </div>
            <div className="relative">
             <button onClick={() => setIsLanguageOpen(!isLanguageOpen)} className="flex items-center gap-2 rounded-md px-3 py-1.5 text-sm text-muted-foreground hover:bg-secondary">
               {languages.find((l) => l.code === language)?.label}

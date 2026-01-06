@@ -111,18 +111,40 @@ const CONTRACT_ABI = [
 	}
 ]
 
-export async function logGrievanceOnChain(complaintId, category) {
-  if (!window.ethereum) return;
+// Hash complaint text using keccak256
+function hashComplaintData(complaintText) {
+  return ethers.keccak256(ethers.toUtf8Bytes(complaintText));
+}
 
-  const provider = new ethers.BrowserProvider(window.ethereum);
-  const signer = await provider.getSigner();
+export async function recordAuditOnChain(complaintId, complaintText, note = "Complaint intake logged") {
+  // Skip if MetaMask is unavailable
+  if (typeof window === "undefined" || !window.ethereum) {
+    console.log("MetaMask not available, skipping blockchain audit");
+    return null;
+  }
 
-  const contract = new ethers.Contract(
-    CONTRACT_ADDRESS,
-    CONTRACT_ABI,
-    signer
-  );
+  try {
+    const provider = new ethers.BrowserProvider(window.ethereum);
+    await provider.send("eth_requestAccounts", []);
+    const signer = await provider.getSigner();
 
-  const tx = await contract.logGrievance(complaintId, category);
-  await tx.wait();
+    const contract = new ethers.Contract(
+      CONTRACT_ADDRESS,
+      CONTRACT_ABI,
+      signer
+    );
+
+    // Convert complaintId string to a numeric hash for uint256
+    const numericId = BigInt(ethers.keccak256(ethers.toUtf8Bytes(complaintId))) % BigInt(2 ** 64);
+    const dataHash = hashComplaintData(complaintText);
+
+    const tx = await contract.recordAudit(numericId, dataHash, note);
+    await tx.wait();
+    
+    console.log("Audit recorded on-chain:", tx.hash);
+    return tx.hash;
+  } catch (error) {
+    console.error("Blockchain audit failed:", error);
+    return null;
+  }
 }
