@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { db } from "@/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { analyzeComplaint } from "@/lib/gemini";
-import { recordAuditOnChain } from "../../ethers.js";
+import { recordAuditOnChain } from "@/lib/ethers";
 
 const languages = [{ code: "en", label: "English" }, { code: "hi", label: "हिंदी" }];
 
