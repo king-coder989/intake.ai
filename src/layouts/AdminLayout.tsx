@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Outlet, NavLink, useLocation } from "react-router-dom";
+import { Outlet, NavLink, useLocation, Link } from "react-router-dom";
 import { LayoutList, Map, Settings, Menu, X } from "lucide-react";
-import logoImage from "@/assets/logo.png";
+import { Logo } from "@/components/ui/Logo";
 
 const navItems = [
   { to: "/admin", icon: LayoutList, label: "Queue", end: true },
@@ -17,9 +17,7 @@ const AdminLayout = () => {
     <div className="flex min-h-screen bg-background">
       <aside className={`fixed left-0 top-0 z-40 flex h-screen flex-col border-r border-sidebar-border bg-sidebar transition-all duration-200 ${sidebarOpen ? "w-60" : "w-[72px]"}`}>
         <div className="flex h-16 items-center justify-between px-4">
-          <div className="flex items-center gap-3">
-            <img src={logoImage} alt="intake.ai" className={`transition-all duration-200 ${sidebarOpen ? "h-7" : "h-6"}`} />
-          </div>
+          <Logo size={sidebarOpen ? "md" : "sm"} />
           <button onClick={() => setSidebarOpen(!sidebarOpen)} className="rounded-md p-1.5 text-sidebar-foreground/70 hover:bg-sidebar-accent">
             {sidebarOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
