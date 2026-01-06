@@ -4,59 +4,50 @@ import { Clock, Copy, AlertTriangle, LayoutList } from "lucide-react";
 const impacts = [
   {
     icon: Clock,
-    number: "60%",
-    title: "Less sorting time",
-    description: "Reduced administrative overhead",
+    title: "Less time wasted",
+    description: "Reduced administrative overhead nationally",
   },
   {
     icon: Copy,
-    number: "80%",
     title: "Fewer duplicates",
-    description: "Eliminate repeated complaints",
+    description: "Eliminate misrouted and repeated complaints",
   },
   {
     icon: AlertTriangle,
-    number: "3x",
-    title: "Faster response",
-    description: "Critical issues surface early",
+    title: "Earlier visibility",
+    description: "Critical issues surface before escalation",
   },
   {
     icon: LayoutList,
-    number: "100%",
-    title: "Structured data",
-    description: "Start from order, not chaos",
+    title: "Start from order",
+    description: "Authorities begin from structure, not chaos",
   },
 ];
 
 export const ImpactSection = () => {
   return (
-    <section id="impact" className="relative py-32 md:py-40 overflow-hidden bg-secondary/30">
-      <div className="section-container">
+    <section className="relative py-32 md:py-40 overflow-hidden">
+      <div className="relative section-container">
         <AnimatedSection className="text-center mb-20">
-          <span className="badge mb-8">Impact</span>
+          <span className="inline-block px-4 py-2 rounded-full border border-border text-muted-foreground text-sm font-medium mb-8">
+            Impact
+          </span>
           <h2 className="text-foreground">
-            What changes when
+            What changes when complaints
             <br />
-            <span className="text-accent">complaints are organised.</span>
+            <span className="text-muted-foreground">are organised.</span>
           </h2>
         </AnimatedSection>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {impacts.map((impact, i) => (
             <AnimatedSection key={i} delay={i * 100}>
-              <div className="group relative text-center p-8 rounded-3xl border border-border bg-card overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-xl hover:shadow-accent/5">
-                {/* Hover gradient */}
-                <div className="absolute inset-0 bg-gradient-to-b from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                
-                <div className="relative">
-                  <div className="w-16 h-16 rounded-2xl bg-accent/10 flex items-center justify-center mx-auto mb-6 group-hover:bg-accent/20 transition-colors">
-                    <impact.icon className="w-8 h-8 text-accent" />
-                  </div>
-                  
-                  <div className="text-4xl font-bold text-foreground mb-2">{impact.number}</div>
-                  <h4 className="text-foreground font-semibold mb-2">{impact.title}</h4>
-                  <p className="text-sm text-muted-foreground">{impact.description}</p>
+              <div className="text-center p-8 rounded-2xl border border-border bg-card transition-colors duration-200 hover:border-muted-foreground/30 group">
+                <div className="w-14 h-14 rounded-2xl bg-secondary flex items-center justify-center mx-auto mb-6 transition-colors group-hover:bg-muted">
+                  <impact.icon className="w-7 h-7 text-foreground" />
                 </div>
+                <h4 className="text-foreground mb-2">{impact.title}</h4>
+                <p className="text-sm text-muted-foreground">{impact.description}</p>
               </div>
             </AnimatedSection>
           ))}

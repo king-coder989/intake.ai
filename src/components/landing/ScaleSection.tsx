@@ -46,47 +46,42 @@ const Counter = ({ end, suffix = "", duration = 2000 }: CounterProps) => {
   }, [isVisible, end, duration]);
 
   return (
-    <span ref={ref} className="stat-number">
+    <span ref={ref} className="stat-number text-foreground">
       {count.toLocaleString()}{suffix}
     </span>
   );
 };
 
 const stats = [
-  { value: 15, suffix: "M+", label: "Grievances registered nationally per year", highlight: false },
-  { value: 500, suffix: "K+", label: "Pending at any given time", highlight: false },
-  { value: 0, suffix: "", label: "Unified national municipal dataset", isZero: true, highlight: true },
-  { value: 4000, suffix: "+", label: "Urban local bodies operating independently", highlight: false },
+  { value: 15, suffix: "M+", label: "Grievances registered nationally per year" },
+  { value: 500, suffix: "K+", label: "Pending at any given time" },
+  { value: 0, suffix: "", label: "Unified national municipal dataset", isZero: true },
+  { value: 4000, suffix: "+", label: "Urban local bodies operating independently" },
 ];
 
 export const ScaleSection = () => {
   return (
-    <section className="relative py-32 md:py-40 overflow-hidden bg-card">
-      <div className="section-container">
+    <section className="relative py-32 md:py-40 overflow-hidden">
+      <div className="relative section-container">
         <AnimatedSection className="text-center mb-20">
-          <span className="badge mb-8">Scale</span>
+          <span className="inline-block px-4 py-2 rounded-full border border-border text-muted-foreground text-sm font-medium mb-8">
+            National Scale
+          </span>
           <h2 className="text-foreground">
-            This is a <span className="text-accent">national</span> problem.
+            This is a scale problem.
           </h2>
         </AnimatedSection>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
           {stats.map((stat, i) => (
             <AnimatedSection key={i} delay={i * 100}>
-              <div className={`card-stat ${stat.highlight ? 'border-destructive/30 bg-gradient-to-br from-destructive/5 to-destructive/10' : ''}`}>
-                <div className="relative z-10">
-                  {stat.isZero ? (
-                    <span className="stat-number !text-destructive" style={{ WebkitTextFillColor: 'hsl(var(--destructive))' }}>
-                      Zero
-                    </span>
-                  ) : (
-                    <Counter end={stat.value} suffix={stat.suffix} />
-                  )}
-                  <p className="mt-4 text-lg text-muted-foreground">{stat.label}</p>
-                </div>
-                
-                {/* Decorative corner */}
-                <div className="absolute top-0 right-0 w-20 h-20 bg-accent/5 rounded-bl-[80px]" />
+              <div className="card-glass group text-center md:text-left">
+                {stat.isZero ? (
+                  <span className="stat-number text-destructive">Zero</span>
+                ) : (
+                  <Counter end={stat.value} suffix={stat.suffix} />
+                )}
+                <p className="mt-4 text-lg text-muted-foreground">{stat.label}</p>
               </div>
             </AnimatedSection>
           ))}
@@ -94,8 +89,7 @@ export const ScaleSection = () => {
 
         <AnimatedSection delay={500} className="mt-16 text-center">
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Cities operate independently, multiplying administrative overhead 
-            <span className="text-accent font-medium"> across the nation.</span>
+            Cities operate independently, multiplying administrative overhead.
           </p>
         </AnimatedSection>
       </div>

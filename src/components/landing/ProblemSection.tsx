@@ -1,62 +1,43 @@
 import { AnimatedSection } from "./AnimatedSection";
-import { X } from "lucide-react";
 
 const problems = [
-  {
-    title: "Unstructured Input",
-    desc: "Complaints arrive as free-text, calls, images, and voice messages with no standard format.",
-  },
-  {
-    title: "Fragmented Systems", 
-    desc: "Different portals, departments, and formats create information silos.",
-  },
-  {
-    title: "Duplicate Overload",
-    desc: "Same issues logged multiple times across channels waste valuable resources.",
-  },
-  {
-    title: "Manual Sorting",
-    desc: "Staff spend time categorizing instead of solving actual problems.",
-  },
+  "Complaints arrive as free-text, calls, images, and messages",
+  "Different portals, departments, and formats",
+  "Same issue logged multiple times",
+  "Staff spend time sorting instead of solving",
 ];
 
 export const ProblemSection = () => {
   return (
-    <section id="problem" className="relative py-32 md:py-40 overflow-hidden bg-secondary/30">
-      <div className="section-container">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Left - Heading */}
-          <div>
-            <AnimatedSection>
-              <div className="accent-line mb-8" />
-              <h2 className="text-foreground">
-                The problem isn't
-                <br />
-                <span className="text-accent">lack of complaints.</span>
-              </h2>
-              <p className="lead mt-6 max-w-md">
-                It's lack of organisation. Critical issues get buried in noise.
-              </p>
-            </AnimatedSection>
-          </div>
+    <section className="relative py-32 md:py-40 overflow-hidden">
+      <div className="relative section-container-sm">
+        <AnimatedSection className="text-center mb-16">
+          <h2 className="text-foreground max-w-3xl mx-auto">
+            The problem is not lack of complaints.
+            <br />
+            <span className="text-muted-foreground">It's lack of organisation.</span>
+          </h2>
+        </AnimatedSection>
 
-          {/* Right - Problem cards */}
-          <div className="space-y-4">
-            {problems.map((problem, i) => (
-              <AnimatedSection key={i} delay={i * 100}>
-                <div className="group flex items-start gap-5 p-6 rounded-2xl bg-card border border-border transition-all duration-300 hover:border-destructive/30 hover:bg-card/80">
-                  <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-destructive/10 flex items-center justify-center group-hover:bg-destructive/20 transition-colors">
-                    <X className="w-5 h-5 text-destructive" />
-                  </div>
-                  <div>
-                    <h4 className="text-foreground font-semibold mb-1">{problem.title}</h4>
-                    <p className="text-muted-foreground text-sm leading-relaxed">{problem.desc}</p>
-                  </div>
+        <div className="max-w-2xl mx-auto">
+          {problems.map((problem, i) => (
+            <AnimatedSection key={i} delay={i * 100} className="mb-6">
+              <div className="flex items-start gap-4 p-5 rounded-xl border border-border bg-card transition-colors duration-200 hover:border-muted-foreground/30">
+                <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-secondary flex items-center justify-center">
+                  <span className="text-muted-foreground text-sm font-medium">✕</span>
                 </div>
-              </AnimatedSection>
-            ))}
-          </div>
+                <p className="text-foreground text-lg leading-relaxed">{problem}</p>
+              </div>
+            </AnimatedSection>
+          ))}
         </div>
+
+        <AnimatedSection delay={500} className="mt-16 text-center">
+          <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto">
+            When complaints are unorganised, 
+            <span className="text-foreground font-medium"> critical issues get buried.</span>
+          </p>
+        </AnimatedSection>
       </div>
     </section>
   );
