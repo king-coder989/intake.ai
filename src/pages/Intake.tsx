@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Image, FileText, Video, Mic, MapPin, ChevronDown, Check } from "lucide-react";
 import { Logo } from "@/components/ui/Logo";
 import { Link } from "react-router-dom";
+import { db } from "@/firebase";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
 const languages = [{ code: "en", label: "English" }, { code: "hi", label: "हिंदी" }];
 
@@ -12,12 +14,29 @@ const Intake = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [complaintId, setComplaintId] = useState("");
   const [submittedAt, setSubmittedAt] = useState<Date | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = () => {
-    if (!complaint.trim()) return;
-    setComplaintId(`INT-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).substring(2, 6).toUpperCase()}`);
-    setSubmittedAt(new Date());
-    setIsSubmitted(true);
+  const handleSubmit = async () => {
+    if (!complaint.trim() || isSubmitting) return;
+    setIsSubmitting(true);
+    
+    try {
+      const docRef = await addDoc(collection(db, "complaints"), {
+        text: complaint.trim(),
+        status: "received",
+        language,
+        createdAt: serverTimestamp()
+      });
+      
+      setComplaintId(docRef.id);
+      setSubmittedAt(new Date());
+      setIsSubmitted(true);
+    } catch (error) {
+      console.error("Error submitting complaint:", error);
+      alert("Failed to submit complaint. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const attachments = [{ icon: Image, label: "Image" }, { icon: FileText, label: "Document" }, { icon: Video, label: "Video" }, { icon: Mic, label: "Voice" }, { icon: MapPin, label: "Location" }];
@@ -52,7 +71,7 @@ const Intake = () => {
                   <div className="flex items-center gap-1">
                     {attachments.map((btn) => (<button key={btn.label} className="rounded-md p-2 text-muted-foreground hover:bg-secondary" title={btn.label}><btn.icon className="h-5 w-5" strokeWidth={1.5} /></button>))}
                   </div>
-                  <button onClick={handleSubmit} disabled={!complaint.trim()} className="btn-primary disabled:opacity-50">Submit</button>
+                  <button onClick={handleSubmit} disabled={!complaint.trim() || isSubmitting} className="btn-primary disabled:opacity-50">{isSubmitting ? "Submitting..." : "Submit"}</button>
                 </div>
               </div>
               <p className="text-center text-sm text-muted-foreground">Your complaint will be processed securely.</p>
