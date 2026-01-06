@@ -4,6 +4,7 @@ import { Logo } from "@/components/ui/Logo";
 import { Link } from "react-router-dom";
 import { db } from "@/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { analyzeComplaint } from "@/lib/gemini";
 
 const languages = [{ code: "en", label: "English" }, { code: "hi", label: "हिंदी" }];
 
@@ -21,10 +22,21 @@ const Intake = () => {
     setIsSubmitting(true);
     
     try {
+      // Analyze complaint with Gemini AI
+      let analysis: { category: string; urgency: string; summary: string } = { category: "Other", urgency: "medium", summary: "" };
+      try {
+        analysis = await analyzeComplaint(complaint.trim());
+      } catch (aiError) {
+        console.error("AI analysis failed, using defaults:", aiError);
+      }
+
       const docRef = await addDoc(collection(db, "complaints"), {
         text: complaint.trim(),
         status: "received",
         language,
+        category: analysis.category,
+        urgency: analysis.urgency,
+        summary: analysis.summary,
         createdAt: serverTimestamp()
       });
       
