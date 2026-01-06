@@ -1,5 +1,11 @@
 import { ethers } from "ethers";
 
+declare global {
+  interface Window {
+    ethereum?: any;
+  }
+}
+
 const CONTRACT_ADDRESS = "0xd9145CCE52D386f254917e481eB44e9943F39138";
 const CONTRACT_ABI = [
 	{
