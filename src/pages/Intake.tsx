@@ -56,9 +56,11 @@ const Intake = () => {
   return (
     <div className="flex min-h-screen flex-col bg-background">
       <header className="border-b border-border/50">
-        <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-6">
-          <Logo size="md" />
-          <div className="relative">
+         <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-6">
+           <div className="flex items-center [&_img]:max-h-8 [&_img]:w-auto [&_img]:object-contain">
+             <Logo size="md" />
+           </div>
+           <div className="relative">
             <button onClick={() => setIsLanguageOpen(!isLanguageOpen)} className="flex items-center gap-2 rounded-md px-3 py-1.5 text-sm text-muted-foreground hover:bg-secondary">
               {languages.find((l) => l.code === language)?.label}
               <ChevronDown className="h-4 w-4" />
