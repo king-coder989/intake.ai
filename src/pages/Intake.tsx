@@ -6,6 +6,7 @@ import { db } from "@/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { analyzeComplaint } from "@/lib/gemini";
 import { recordAuditOnChain } from "@/lib/ethers";
+import { LocationPicker } from "@/components/LocationPicker";
 
 const languages = [{ code: "en", label: "English" }, { code: "hi", label: "हिंदी" }];
 
@@ -17,6 +18,8 @@ const Intake = () => {
   const [complaintId, setComplaintId] = useState("");
   const [submittedAt, setSubmittedAt] = useState<Date | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showLocationPicker, setShowLocationPicker] = useState(false);
+  const [selectedLocation, setSelectedLocation] = useState<{ lat: number; lng: number } | null>(null);
 
   const handleSubmit = async () => {
     if (!complaint.trim() || isSubmitting) return;
@@ -38,6 +41,7 @@ const Intake = () => {
         category: analysis.category,
         urgency: analysis.urgency,
         summary: analysis.summary,
+        location: selectedLocation ? { lat: selectedLocation.lat, lng: selectedLocation.lng } : null,
         createdAt: serverTimestamp()
       });
       
@@ -55,7 +59,17 @@ const Intake = () => {
     }
   };
 
-  const attachments = [{ icon: Image, label: "Image" }, { icon: FileText, label: "Document" }, { icon: Video, label: "Video" }, { icon: Mic, label: "Voice" }, { icon: MapPin, label: "Location" }];
+  const attachments = [
+    { icon: Image, label: "Image", onClick: () => {} },
+    { icon: FileText, label: "Document", onClick: () => {} },
+    { icon: Video, label: "Video", onClick: () => {} },
+    { icon: Mic, label: "Voice", onClick: () => {} },
+    { icon: MapPin, label: "Location", onClick: () => setShowLocationPicker(true) },
+  ];
+
+  const handleLocationSelect = (location: { lat: number; lng: number }) => {
+    setSelectedLocation(location);
+  };
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
@@ -85,9 +99,25 @@ const Intake = () => {
             <div className="animate-fade-in">
               <div className="card-base mb-4 p-0">
                 <textarea value={complaint} onChange={(e) => setComplaint(e.target.value)} placeholder="Describe your civic issue..." className="min-h-[160px] w-full resize-none rounded-t-lg border-none bg-transparent p-6 text-lg text-foreground placeholder:text-muted-foreground focus:outline-none" />
+                {selectedLocation && (
+                  <div className="mb-2 flex items-center gap-2 rounded-md bg-accent/10 px-3 py-2 text-sm text-accent">
+                    <MapPin className="h-4 w-4" />
+                    <span>Location: {selectedLocation.lat.toFixed(4)}, {selectedLocation.lng.toFixed(4)}</span>
+                    <button onClick={() => setSelectedLocation(null)} className="ml-auto text-accent hover:text-accent/80">×</button>
+                  </div>
+                )}
                 <div className="flex items-center justify-between border-t border-border px-4 py-3">
                   <div className="flex items-center gap-1">
-                    {attachments.map((btn) => (<button key={btn.label} className="rounded-md p-2 text-muted-foreground hover:bg-secondary" title={btn.label}><btn.icon className="h-5 w-5" strokeWidth={1.5} /></button>))}
+                    {attachments.map((btn) => (
+                      <button 
+                        key={btn.label} 
+                        onClick={btn.onClick}
+                        className={`rounded-md p-2 hover:bg-secondary ${btn.label === "Location" && selectedLocation ? "text-accent" : "text-muted-foreground"}`} 
+                        title={btn.label}
+                      >
+                        <btn.icon className="h-5 w-5" strokeWidth={1.5} />
+                      </button>
+                    ))}
                   </div>
                   <button onClick={handleSubmit} disabled={!complaint.trim() || isSubmitting} className="btn-primary disabled:opacity-50">{isSubmitting ? "Submitting..." : "Submit"}</button>
                 </div>
@@ -110,6 +140,12 @@ const Intake = () => {
           )}
         </div>
       </main>
+      {showLocationPicker && (
+        <LocationPicker
+          onLocationSelect={handleLocationSelect}
+          onClose={() => setShowLocationPicker(false)}
+        />
+      )}
     </div>
   );
 };
