@@ -1,5 +1,6 @@
 import { AnimatedSection } from "./AnimatedSection";
 import { Clock, Copy, AlertTriangle, LayoutList } from "lucide-react";
+import { LampAmbient } from "@/components/ui/lamp-ambient";
 
 const impacts = [
   {
@@ -26,7 +27,8 @@ const impacts = [
 
 export const ImpactSection = () => {
   return (
-    <section className="relative py-32 md:py-40 overflow-hidden">
+    <LampAmbient intensity="faint" direction="top">
+      <section className="relative py-32 md:py-40 overflow-hidden">
       <div className="relative section-container">
         <AnimatedSection className="text-center mb-20">
           <span className="inline-block px-4 py-2 rounded-full border border-border text-muted-foreground text-sm font-medium mb-8">
@@ -54,5 +56,6 @@ export const ImpactSection = () => {
         </div>
       </div>
     </section>
+    </LampAmbient>
   );
 };

@@ -1,4 +1,5 @@
 import { AnimatedSection } from "./AnimatedSection";
+import { LampAmbient } from "@/components/ui/lamp-ambient";
 
 const problems = [
   "Complaints arrive as free-text, calls, images, and messages",
@@ -9,7 +10,8 @@ const problems = [
 
 export const ProblemSection = () => {
   return (
-    <section className="relative py-32 md:py-40 overflow-hidden">
+    <LampAmbient intensity="subtle" direction="top">
+      <section className="relative py-32 md:py-40 overflow-hidden">
       <div className="relative section-container-sm">
         <AnimatedSection className="text-center mb-16">
           <h2 className="text-foreground max-w-3xl mx-auto">
@@ -40,5 +42,6 @@ export const ProblemSection = () => {
         </AnimatedSection>
       </div>
     </section>
+    </LampAmbient>
   );
 };
