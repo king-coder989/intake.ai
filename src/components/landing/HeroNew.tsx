@@ -1,59 +1,54 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
+import { LampContainer } from "@/components/ui/lamp";
 
 export const HeroNew = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
-      {/* Hero visual - abstract data visualization */}
-      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1/2 h-[80vh] opacity-15 md:opacity-20">
-        <HeroVisualization />
-      </div>
-
-      {/* Content */}
-      <div className="relative z-10 section-container pt-32 pb-20">
-        <div className="max-w-4xl">
-          {/* Eyebrow */}
-          <div className="animate-fade-up opacity-0 mb-8">
-            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border text-sm text-muted-foreground">
-              Civic Infrastructure Intelligence
-            </span>
-          </div>
-
-          {/* Headline */}
-          <h1 className="animate-fade-up opacity-0 delay-100 text-foreground mb-8">
-            Organising civic complaints
-            <br />
-            <span className="text-muted-foreground">before they become chaos.</span>
-          </h1>
-
-          {/* Subheadline */}
-          <p className="animate-fade-up opacity-0 delay-200 lead max-w-2xl mb-12">
-            Cities receive thousands of complaints every day. Most are unstructured, 
-            manually handled, and poorly prioritised. INTAKE.ai brings order at the 
-            point where systems fail.
-          </p>
-
-          {/* CTAs */}
-          <div className="animate-fade-up opacity-0 delay-300 flex flex-col sm:flex-row gap-4">
-            <Link to="/intake" className="btn-primary group">
-              Register a Complaint
-              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-            </Link>
-            <Link to="/admin" className="btn-secondary">
-              View Admin Demo
-            </Link>
-          </div>
+    <LampContainer>
+      <motion.div
+        initial={{ opacity: 0.5, y: 100 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{
+          delay: 0.3,
+          duration: 0.8,
+          ease: "easeInOut",
+        }}
+        className="flex flex-col items-center text-center"
+      >
+        {/* Eyebrow */}
+        <div className="mb-8">
+          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border text-sm text-muted-foreground">
+            Civic Infrastructure Intelligence
+          </span>
         </div>
-      </div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-fade-in opacity-0 delay-700">
-        <div className="flex flex-col items-center gap-2 text-muted-foreground">
-          <span className="text-xs uppercase tracking-widest">Scroll</span>
-          <div className="w-px h-12 bg-border" />
+        {/* Headline */}
+        <h1 className="text-foreground mb-8 bg-gradient-to-br from-foreground to-muted-foreground bg-clip-text">
+          Organising civic complaints
+          <br />
+          <span className="text-muted-foreground">before they become chaos.</span>
+        </h1>
+
+        {/* Subheadline */}
+        <p className="lead max-w-2xl mb-12 text-muted-foreground">
+          Cities receive thousands of complaints every day. Most are unstructured, 
+          manually handled, and poorly prioritised. INTAKE.ai brings order at the 
+          point where systems fail.
+        </p>
+
+        {/* CTAs */}
+        <div className="flex flex-col sm:flex-row gap-4">
+          <Link to="/intake" className="btn-primary group">
+            Register a Complaint
+            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+          </Link>
+          <Link to="/admin" className="btn-secondary">
+            View Admin Demo
+          </Link>
         </div>
-      </div>
-    </section>
+      </motion.div>
+    </LampContainer>
   );
 };
 
