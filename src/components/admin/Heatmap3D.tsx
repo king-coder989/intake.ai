@@ -112,7 +112,84 @@ const Heatmap3D = ({ className }: Heatmap3DProps) => {
     gridHelper.position.y = 0.01;
     scene.add(gridHelper);
 
-    // Add complaint spheres
+    // Helper function to create text sprite
+    const createTextSprite = (text: string, position: THREE.Vector3, color: string = "#888899") => {
+      const canvas = document.createElement("canvas");
+      const context = canvas.getContext("2d")!;
+      canvas.width = 128;
+      canvas.height = 64;
+      context.fillStyle = color;
+      context.font = "bold 24px Arial";
+      context.textAlign = "center";
+      context.textBaseline = "middle";
+      context.fillText(text, 64, 32);
+
+      const texture = new THREE.CanvasTexture(canvas);
+      const material = new THREE.SpriteMaterial({ map: texture, transparent: true });
+      const sprite = new THREE.Sprite(material);
+      sprite.position.copy(position);
+      sprite.scale.set(1.2, 0.6, 1);
+      return sprite;
+    };
+
+    // Add axis lines
+    const axisLineMaterial = new THREE.LineBasicMaterial({ color: 0x667788, transparent: true, opacity: 0.6 });
+    
+    // Y-axis (vertical - urgency)
+    const yAxisGeometry = new THREE.BufferGeometry().setFromPoints([
+      new THREE.Vector3(-6, 0, -6),
+      new THREE.Vector3(-6, 4, -6),
+    ]);
+    scene.add(new THREE.Line(yAxisGeometry, axisLineMaterial));
+
+    // X-axis (longitude)
+    const xAxisGeometry = new THREE.BufferGeometry().setFromPoints([
+      new THREE.Vector3(-6, 0, -6),
+      new THREE.Vector3(6, 0, -6),
+    ]);
+    scene.add(new THREE.Line(xAxisGeometry, axisLineMaterial));
+
+    // Z-axis (latitude)
+    const zAxisGeometry = new THREE.BufferGeometry().setFromPoints([
+      new THREE.Vector3(-6, 0, -6),
+      new THREE.Vector3(-6, 0, 6),
+    ]);
+    scene.add(new THREE.Line(zAxisGeometry, axisLineMaterial));
+
+    // Y-axis labels (Urgency levels)
+    scene.add(createTextSprite("Low", new THREE.Vector3(-6.5, 1.2, -6)));
+    scene.add(createTextSprite("Med", new THREE.Vector3(-6.5, 2.4, -6)));
+    scene.add(createTextSprite("High", new THREE.Vector3(-6.5, 3.6, -6)));
+    scene.add(createTextSprite("Urgency", new THREE.Vector3(-6.5, 4.3, -6), "#aabbcc"));
+
+    // Y-axis tick marks
+    [1.2, 2.4, 3.6].forEach((y) => {
+      const tickGeom = new THREE.BufferGeometry().setFromPoints([
+        new THREE.Vector3(-6, y, -6),
+        new THREE.Vector3(-5.8, y, -6),
+      ]);
+      scene.add(new THREE.Line(tickGeom, axisLineMaterial));
+    });
+
+    // X-axis labels (Longitude)
+    const lngStep = (bounds.maxLng - bounds.minLng) / 4;
+    for (let i = 0; i <= 4; i++) {
+      const xPos = -5 + i * 2.5;
+      const lngValue = bounds.minLng + i * lngStep;
+      scene.add(createTextSprite(lngValue.toFixed(2), new THREE.Vector3(xPos, 0, -6.8)));
+    }
+    scene.add(createTextSprite("Longitude", new THREE.Vector3(0, 0, -7.5), "#aabbcc"));
+
+    // Z-axis labels (Latitude)
+    const latStep = (bounds.maxLat - bounds.minLat) / 4;
+    for (let i = 0; i <= 4; i++) {
+      const zPos = -5 + i * 2.5;
+      const latValue = bounds.minLat + i * latStep;
+      scene.add(createTextSprite(latValue.toFixed(2), new THREE.Vector3(-7, 0, zPos)));
+    }
+    scene.add(createTextSprite("Latitude", new THREE.Vector3(-7.5, 0, 0), "#aabbcc"));
+
+    // Add complaint spheres (freely suspended)
     complaintsWithLocation.forEach((complaint) => {
       const { x, z } = normalizeCoords(complaint.location!.lat, complaint.location!.lng);
       const floatHeight = URGENCY_HEIGHT[complaint.urgency] * 1.2;
@@ -134,19 +211,6 @@ const Heatmap3D = ({ className }: Heatmap3DProps) => {
       sphere.position.set(x, floatHeight, z);
       sphere.userData = { complaint };
       scene.add(sphere);
-
-      // Vertical line connecting to ground for context
-      const lineGeometry = new THREE.BufferGeometry().setFromPoints([
-        new THREE.Vector3(x, 0.02, z),
-        new THREE.Vector3(x, floatHeight - radius, z),
-      ]);
-      const lineMaterial = new THREE.LineBasicMaterial({
-        color: new THREE.Color(color),
-        transparent: true,
-        opacity: 0.3,
-      });
-      const line = new THREE.Line(lineGeometry, lineMaterial);
-      scene.add(line);
     });
 
     // Fallback: if no complaints with location, show placeholder spheres
