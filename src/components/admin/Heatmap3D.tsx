@@ -112,55 +112,60 @@ const Heatmap3D = ({ className }: Heatmap3DProps) => {
     gridHelper.position.y = 0.01;
     scene.add(gridHelper);
 
-    // Add complaint columns
+    // Add complaint spheres
     complaintsWithLocation.forEach((complaint) => {
       const { x, z } = normalizeCoords(complaint.location!.lat, complaint.location!.lng);
-      const height = URGENCY_HEIGHT[complaint.urgency] * 0.8;
+      const floatHeight = URGENCY_HEIGHT[complaint.urgency] * 1.2;
+      const radius = 0.2 + URGENCY_HEIGHT[complaint.urgency] * 0.08;
       const color = DEPARTMENT_COLORS[complaint.department] || "#888888";
 
-      // Column geometry
-      const geometry = new THREE.CylinderGeometry(0.15, 0.2, height, 8);
+      // Sphere geometry
+      const geometry = new THREE.SphereGeometry(radius, 16, 16);
       const material = new THREE.MeshStandardMaterial({
         color: new THREE.Color(color),
         transparent: true,
-        opacity: 0.85,
-        metalness: 0.3,
-        roughness: 0.4,
-      });
-      const column = new THREE.Mesh(geometry, material);
-      column.position.set(x, height / 2, z);
-      column.userData = { complaint };
-      scene.add(column);
-
-      // Glowing top cap
-      const capGeometry = new THREE.SphereGeometry(0.15, 8, 8);
-      const capMaterial = new THREE.MeshStandardMaterial({
-        color: new THREE.Color(color),
+        opacity: 0.9,
+        metalness: 0.4,
+        roughness: 0.3,
         emissive: new THREE.Color(color),
-        emissiveIntensity: 0.4,
+        emissiveIntensity: 0.15,
       });
-      const cap = new THREE.Mesh(capGeometry, capMaterial);
-      cap.position.set(x, height, z);
-      scene.add(cap);
+      const sphere = new THREE.Mesh(geometry, material);
+      sphere.position.set(x, floatHeight, z);
+      sphere.userData = { complaint };
+      scene.add(sphere);
+
+      // Vertical line connecting to ground for context
+      const lineGeometry = new THREE.BufferGeometry().setFromPoints([
+        new THREE.Vector3(x, 0.02, z),
+        new THREE.Vector3(x, floatHeight - radius, z),
+      ]);
+      const lineMaterial = new THREE.LineBasicMaterial({
+        color: new THREE.Color(color),
+        transparent: true,
+        opacity: 0.3,
+      });
+      const line = new THREE.Line(lineGeometry, lineMaterial);
+      scene.add(line);
     });
 
-    // Fallback: if no complaints with location, show placeholder columns
+    // Fallback: if no complaints with location, show placeholder spheres
     if (complaintsWithLocation.length === 0) {
       const placeholderPositions = [
-        { x: 0, z: 0, height: 1.5 },
-        { x: 2, z: -1, height: 1 },
-        { x: -2, z: 1, height: 2 },
+        { x: 0, z: 0, height: 1.8, radius: 0.3 },
+        { x: 2, z: -1, height: 1.2, radius: 0.25 },
+        { x: -2, z: 1, height: 2.4, radius: 0.35 },
       ];
-      placeholderPositions.forEach(({ x, z, height }) => {
-        const geometry = new THREE.CylinderGeometry(0.2, 0.25, height, 8);
+      placeholderPositions.forEach(({ x, z, height, radius }) => {
+        const geometry = new THREE.SphereGeometry(radius, 16, 16);
         const material = new THREE.MeshStandardMaterial({
           color: 0x666688,
           transparent: true,
           opacity: 0.5,
         });
-        const column = new THREE.Mesh(geometry, material);
-        column.position.set(x, height / 2, z);
-        scene.add(column);
+        const sphere = new THREE.Mesh(geometry, material);
+        sphere.position.set(x, height, z);
+        scene.add(sphere);
       });
     }
 
@@ -304,21 +309,21 @@ const Heatmap3D = ({ className }: Heatmap3DProps) => {
           </div>
         </div>
 
-        {/* Urgency height */}
+        {/* Urgency height/size */}
         <div className="mt-3 pt-3 border-t border-border/50">
-          <p className="text-xs text-muted-foreground mb-2">Column Height (Urgency)</p>
+          <p className="text-xs text-muted-foreground mb-2">Sphere Height & Size (Urgency)</p>
           <div className="flex gap-4 text-xs">
             <div className="flex items-center gap-1.5">
-              <div className="w-1 h-2 bg-foreground/60 rounded-sm" />
-              <span className="text-muted-foreground">Low</span>
+              <div className="w-2 h-2 bg-foreground/60 rounded-full" />
+              <span className="text-muted-foreground">Low (ground)</span>
             </div>
             <div className="flex items-center gap-1.5">
-              <div className="w-1 h-3 bg-foreground/70 rounded-sm" />
+              <div className="w-2.5 h-2.5 bg-foreground/70 rounded-full" />
               <span className="text-muted-foreground">Medium</span>
             </div>
             <div className="flex items-center gap-1.5">
-              <div className="w-1 h-4 bg-foreground/80 rounded-sm" />
-              <span className="text-muted-foreground">High</span>
+              <div className="w-3 h-3 bg-foreground/80 rounded-full" />
+              <span className="text-muted-foreground">High (floating)</span>
             </div>
           </div>
         </div>
