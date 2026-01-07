@@ -9,12 +9,10 @@ import { AdminSection } from "@/components/landing/AdminSection";
 import { ImpactSection } from "@/components/landing/ImpactSection";
 import { FinalCTA } from "@/components/landing/FinalCTA";
 import { FooterNew } from "@/components/landing/FooterNew";
-import { SunlightEffect } from "@/components/landing/SunlightEffect";
 
 const Landing = () => {
   return (
     <div className="min-h-screen bg-background">
-      <SunlightEffect />
       <HeaderNew />
       <main>
         <HeroNew />
