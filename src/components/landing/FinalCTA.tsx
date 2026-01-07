@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { AnimatedSection } from "./AnimatedSection";
+import { LampAmbient } from "@/components/ui/lamp-ambient";
 
 export const FinalCTA = () => {
   return (
-    <section className="relative py-32 md:py-40 overflow-hidden bg-card">
+    <LampAmbient intensity="subtle" direction="bottom">
+      <section className="relative py-32 md:py-40 overflow-hidden bg-card">
       <div className="relative section-container-sm text-center">
         <AnimatedSection>
           <h2 className="text-foreground mb-6">
@@ -34,5 +36,6 @@ export const FinalCTA = () => {
         </AnimatedSection>
       </div>
     </section>
+    </LampAmbient>
   );
 };

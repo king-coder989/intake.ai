@@ -40,7 +40,7 @@ export const HeaderNew = () => {
     >
       <nav className="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
         {/* Logo */}
-        <div className="flex items-center [&_img]:max-h-14 [&_img]:w-auto [&_img]:object-contain">
+        <div className="flex items-center">
           <Logo size="md" />
         </div>
         {/* Desktop nav */}

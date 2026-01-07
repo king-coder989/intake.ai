@@ -1,5 +1,6 @@
 import { AnimatedSection } from "./AnimatedSection";
 import { Layers, Tag, LayoutList, ArrowRight } from "lucide-react";
+import { LampAmbient } from "@/components/ui/lamp-ambient";
 
 const features = [
   {
@@ -26,7 +27,8 @@ const features = [
 
 export const SolutionSection = () => {
   return (
-    <section className="relative py-32 md:py-40 overflow-hidden">
+    <LampAmbient intensity="medium" direction="top">
+      <section className="relative py-32 md:py-40 overflow-hidden">
       <div className="relative section-container">
         <AnimatedSection className="text-center mb-20">
           <span className="inline-block px-4 py-2 rounded-full border border-border text-muted-foreground text-sm font-medium mb-8">
@@ -56,5 +58,6 @@ export const SolutionSection = () => {
         </div>
       </div>
     </section>
+    </LampAmbient>
   );
 };
