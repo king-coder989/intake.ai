@@ -1,8 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 export const SunlightEffect = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [windIntensity, setWindIntensity] = useState<"low" | "medium" | "high">("low");
 
   useEffect(() => {
     const container = containerRef.current;
@@ -12,7 +11,6 @@ export const SunlightEffect = () => {
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReducedMotion) return;
 
-    // Cursor tracking
     const handleMouseMove = (e: MouseEvent) => {
       const x = (e.clientX / window.innerWidth) * 100;
       const y = (e.clientY / window.innerHeight) * 100;
@@ -20,19 +18,8 @@ export const SunlightEffect = () => {
       container.style.setProperty("--mouse-y", `${y}%`);
     };
 
-    // Random wind intensity changes
-    const windInterval = setInterval(() => {
-      const random = Math.random();
-      if (random < 0.4) setWindIntensity("low");
-      else if (random < 0.75) setWindIntensity("medium");
-      else setWindIntensity("high");
-    }, 8000);
-
     window.addEventListener("mousemove", handleMouseMove);
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      clearInterval(windInterval);
-    };
+    return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
   return (
@@ -40,73 +27,60 @@ export const SunlightEffect = () => {
       ref={containerRef}
       className="sunlight-container"
       aria-hidden="true"
-      data-wind={windIntensity}
       style={{
         ["--mouse-x" as string]: "50%",
         ["--mouse-y" as string]: "30%",
       }}
     >
-      {/* SVG Filters */}
+      {/* SVG Filters for organic effects */}
       <svg className="absolute w-0 h-0" aria-hidden="true">
         <defs>
-          <filter id="curtain-wave">
+          <filter id="leaf-shadow-filter">
             <feTurbulence
               type="fractalNoise"
-              baseFrequency="0.01 0.02"
+              baseFrequency="0.015"
               numOctaves="3"
-              seed="2"
+              seed="5"
             >
               <animate
                 attributeName="baseFrequency"
-                values="0.01 0.02;0.015 0.025;0.01 0.02"
-                dur="8s"
+                values="0.015;0.018;0.015"
+                dur="20s"
                 repeatCount="indefinite"
               />
             </feTurbulence>
-            <feDisplacementMap in="SourceGraphic" scale="25" />
+            <feDisplacementMap in="SourceGraphic" scale="30" />
+            <feGaussianBlur stdDeviation="8" />
           </filter>
-          <filter id="soft-glow">
-            <feGaussianBlur stdDeviation="20" />
+          <filter id="beam-blur">
+            <feGaussianBlur stdDeviation="15" />
           </filter>
         </defs>
       </svg>
 
-      {/* Window frame on left side */}
-      <div className="window-frame">
-        <div className="window-pane window-pane-1" />
-        <div className="window-pane window-pane-2" />
-        <div className="window-frame-border" />
-        <div className="window-frame-divider-h" />
-        <div className="window-frame-divider-v" />
-      </div>
+      {/* Layer 1: Base warm glow */}
+      <div className="sunlight-base-glow" />
 
-      {/* Light curtains flowing from window */}
-      <div className="light-curtain light-curtain-1" />
-      <div className="light-curtain light-curtain-2" />
-      <div className="light-curtain light-curtain-3" />
-      <div className="light-curtain light-curtain-4" />
+      {/* Layer 2: Window light beams */}
+      <div className="sunlight-beams" />
 
-      {/* Ambient glow matching accent color */}
-      <div className="window-ambient-glow" />
+      {/* Layer 3: Organic leaf shadows */}
+      <div className="sunlight-leaves" />
 
-      {/* Subtle dust particles in the light */}
-      <div className="window-dust">
-        {Array.from({ length: 15 }).map((_, i) => (
-          <span
-            key={i}
-            className="dust-mote"
-            style={{
-              left: `${5 + (i * 4)}%`,
-              top: `${10 + ((i * 17) % 80)}%`,
-              animationDelay: `${i * 0.8}s`,
-              animationDuration: `${6 + (i % 5) * 2}s`,
-            }}
-          />
+      {/* Layer 4: Cursor-reactive light */}
+      <div className="sunlight-cursor-glow" />
+
+      {/* Layer 5: Dust particles */}
+      <div className="sunlight-dust">
+        {Array.from({ length: 12 }).map((_, i) => (
+          <span key={i} className="dust-particle" style={{
+            left: `${10 + (i * 7.5)}%`,
+            top: `${15 + ((i * 23) % 70)}%`,
+            animationDelay: `${i * 1.2}s`,
+            animationDuration: `${8 + (i % 4) * 2}s`,
+          }} />
         ))}
       </div>
-
-      {/* Cursor-reactive warmth */}
-      <div className="sunlight-cursor-glow" />
     </div>
   );
 };
