@@ -13,8 +13,28 @@ interface FirestoreComplaint {
   text: string;
   status: string;
   language?: string;
+  category?: string;
+  urgency?: string;
   createdAt: Timestamp | null;
 }
+
+const CategoryBadge = ({ category }: { category?: string }) => (
+  <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-primary/10 text-primary">
+    {category || "Unclassified"}
+  </span>
+);
+
+const FirestoreUrgencyBadge = ({ urgency }: { urgency?: string }) => {
+  const level = urgency?.toLowerCase() || "normal";
+  const styles: Record<string, string> = {
+    high: "bg-destructive/10 text-destructive",
+    medium: "bg-yellow-500/10 text-yellow-600 dark:text-yellow-400",
+    low: "bg-muted text-muted-foreground",
+    normal: "bg-muted text-muted-foreground",
+  };
+  const displayText = urgency ? urgency.charAt(0).toUpperCase() + urgency.slice(1).toLowerCase() : "Normal";
+  return <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${styles[level] || styles.normal}`}>{displayText}</span>;
+};
 
 const ComplaintQueue = () => {
   const [dept, setDept] = useState("All Departments");
@@ -74,6 +94,8 @@ const ComplaintQueue = () => {
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1 min-w-0">
                     <div className="mb-2 flex flex-wrap items-center gap-2">
+                      <CategoryBadge category={c.category} />
+                      <FirestoreUrgencyBadge urgency={c.urgency} />
                       <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-accent/10 text-accent">{c.status}</span>
                       {c.language && <span className="text-xs text-muted-foreground uppercase">{c.language}</span>}
                     </div>
